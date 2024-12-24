@@ -1,9 +1,8 @@
 import { FaRepeat } from "react-icons/fa6";
 import {
-  TbPlayerTrackNextFilled,
-  TbPlayerTrackPrevFilled,
-} from "react-icons/tb";
-
+  MdSkipNext ,
+  MdSkipPrevious ,
+} from "react-icons/md";
 
 import useMusic from "@/hooks/useMusic";
 import React, { useEffect, useRef, useState } from "react";
@@ -31,57 +30,57 @@ export const Audio = () => {
     setLopp(!loop);
     console.log(loop);
   };
-  const [progress, setProgress] = useState(0);
-  const updateProgress = () => {
-    if (audioRef.current) {
-      const duration = audioRef.current.duration;
-      const currentTime = audioRef.current.currentTime;
-      setProgress((currentTime / duration) * 100);
-    }
-  };
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      audio.addEventListener("timeupdate", updateProgress);
-      return () => audio.removeEventListener("timeupdate", updateProgress);
-    }
-  }, []);
+  
+  // const [progress, setProgress] = useState(0);
+  // const updateProgress = () => {
+  //   if (audioRef.current) {
+  //     const duration = audioRef.current.duration;
+  //     const currentTime = audioRef.current.currentTime;
+  //     setProgress((currentTime / duration) * 100);
+  //   }
+  // };
+  // useEffect(() => {
+  //   const audio = audioRef.current;
+  //   if (audio) {
+  //     audio.addEventListener("timeupdate", updateProgress);
+  //     return () => audio.removeEventListener("timeupdate", updateProgress);
+  //   }
+  // }, []);
 
   return (
     <>
       <audio
         ref={audioRef}
-        className="absolute top-24 left-0"
         src={songSelected.song}
       ></audio>
 
-      <div className="absolute bottom-12 left-0 flex items-center justify-between w-72 rounded-2xl h-12 border-b-4 border-[#FF0000] shadow-sm">
+      <div className="flex items-center justify-between w-full md:w-5/6 h-12 border-l-2 border-r-2 border-blue text-white/90">
         <button
           onClick={() => handleRepeat()}
           className={`active:scale-95 duration-100 ml-4 ${
-            loop ? "text-[#FFAA00]" : "text-[#2E2E2E]"
+            loop ? "text-blue" : ""
           }`}
         >
           <FaRepeat size={20} />
         </button>
         <button className="active:scale-95  duration-100">
-          <TbPlayerTrackPrevFilled size={20} color="#2E2E2E" />
+          <MdSkipPrevious  size={30} />
         </button>
         <button
           onClick={() => HandleClickPlay()}
-          className="active:scale-95  duration-100"
+          className="active:scale-95  duration-100 text-blue"
         >
           {!boton ? (
-            <FaPlayCircle size={25} color="#2E2E2E" />
+            <FaPlayCircle size={70} />
           ) : (
-            <FaPauseCircle size={25} color="#2E2E2E" />
+            <FaPauseCircle size={70} />
           )}
         </button>
         <button className="active:scale-95  duration-100">
-          <TbPlayerTrackNextFilled size={20} color="#2E2E2E" />
+          <MdSkipNext size={30} />
         </button>
         <button className="active:scale-95 duration-100 mr-4">
-          <FaRandom size={20} color="#2E2E2E" />
+          <FaRandom size={20} />
         </button>
       </div>
     </>

@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Overpass } from "next/font/google";
+import { PT_Sans_Caption } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
-import Options from "@/components/Options";
 import { MusicProvider } from "@/context/MusicContext";
 
-const fuente = Overpass({
+const fuente = PT_Sans_Caption({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -24,13 +22,7 @@ export default function RootLayout({
     <html lang="es">
       <body suppressHydrationWarning={true} className={fuente.className}>
         <MusicProvider>
-          <main className="mx-4 h-screen">
-            <NavBar />
-            <div className="flex overflow-hidden">
-              <Options />
-              {children}
-            </div>
-          </main>
+          {children}
         </MusicProvider>
       </body>
     </html>
